@@ -4,6 +4,7 @@ const SIGN_IN = "SIGN_IN";
 const SIGN_OUT = "SIGN_OUT";
 //Action Creator
 export function signInUser(userId) {
+  console.log("sign in user",userId)
   return { type: SIGN_IN, payload: userId };
 }
 export function signOutUser() {

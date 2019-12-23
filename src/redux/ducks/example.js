@@ -15,10 +15,16 @@ export default function reducer(state = {}, action = {}) {
 }
 
 // Action Creators
+
+export const createStream = formValues => async dispatch => {
+  const response = await server.post("/streams", formValues);
+  dispatch({ type: CREATE_STREAM, payload: response.data });
+};
+
 export function loadWidgets() {
   return { type: LOAD };
 }
-
+export const edit = ()=>{};
 export function createWidget(widget) {
   return { type: CREATE, widget };
 }

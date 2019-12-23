@@ -1,5 +1,28 @@
 import React from "react";
 
-const StreamShow = () => <div>StreamShow</div>;
+import { connect } from "react-redux";
+import { readStream } from "../../redux/ducks/streams";
+import _ from "lodash";
+class StreamShow extends React.Component {
+  componentDidMount() {
+    this.props.readStream(this.props.match.params.id);
+  }
 
-export default StreamShow;
+  render() {
+    if (!this.props.stream) {
+      return <div>loading...</div>;
+    }
+    const { title, description } = this.props.stream;
+    return (
+      <div>
+        <h1>{title}</h1>
+        <h5>{description}</h5>
+      </div>
+    );
+  }
+}
+const mapStateToProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(mapStateToProps, { readStream })(StreamShow);

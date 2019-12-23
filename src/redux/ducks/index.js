@@ -1,6 +1,12 @@
-import { combineReducers } from 'redux';
-// import * as reducers from './ducks/index';
-import authReducer from './auth'
+import { combineReducers } from "redux";
 
-const rootReducer = combineReducers({auth:authReducer});
+import authReducer from "./auth";
+import { reducer as streamsReducer } from "./streams";
+import { reducer as formReducer } from "redux-form";
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+  form: formReducer,
+  streams: streamsReducer
+});
 export default rootReducer;
