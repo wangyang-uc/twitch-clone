@@ -14,12 +14,12 @@ class GoogleAuth extends React.Component {
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
           this.onAuthChange(this.auth.isSignedIn.get());
-          this.auth.isSignedIn.listen(()=>this.onAuthChange());//It may need some change here, after sign in it still call sign out
+          this.auth.isSignedIn.listen(this.onAuthChange);
         });
     });
   }
   onAuthChange = status => {
-    console.log("on Auth Change", status);//Status is undefined, kicking back from google auth process.
+    console.log("on Auth Change", status);
     if (status) {
       this.props.signInUser(this.auth.currentUser.get().getId());
     } else {
