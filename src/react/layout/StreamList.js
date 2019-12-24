@@ -22,9 +22,7 @@ class StreamList extends React.Component {
     );
   };
   renderAdmin(stream) {
-    // if (StereoPannerNode.userId === this.props.currentUserId) {
-    if (!this.props.currentUserId) {
-      //Temp Fix L 252
+    if (StereoPannerNode.userId === this.props.currentUserId) {
       return (
         <div className="right floated content">
           <Link className="ui button primary" to={`/streams/edit/${stream.id}`}>Edit</Link>
@@ -34,8 +32,7 @@ class StreamList extends React.Component {
     }
   }
   renderCreate() {
-    // if (this.props.isSignedIn) {//Fix it L254 after the sign is fixed
-    if(true){
+    if (this.props.isSignedIn) {
       return (
         <div style={{textAlign:'right'}}>
           <Link to="/streams/new" className="ui button primary">Create Stream</Link>

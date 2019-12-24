@@ -2,7 +2,6 @@ import React from "react";
 
 import { connect } from "react-redux";
 import { readStream } from "../../redux/ducks/streams";
-import _ from "lodash";
 class StreamShow extends React.Component {
   componentDidMount() {
     this.props.readStream(this.props.match.params.id);

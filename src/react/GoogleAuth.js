@@ -13,14 +13,13 @@ class GoogleAuth extends React.Component {
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
-          // this.onAuthChange(this.auth.isSignedIn.get());
-          this.onAuthChange(false);
-          this.auth.isSignedIn.listen(this.onAuthChange);
+          this.onAuthChange(this.auth.isSignedIn.get());
+          this.auth.isSignedIn.listen(()=>this.onAuthChange());//It may need some change here, after sign in it still call sign out
         });
     });
   }
   onAuthChange = status => {
-    console.log("on Auth Change",status)
+    console.log("on Auth Change", status);//Status is undefined, kicking back from google auth process.
     if (status) {
       this.props.signInUser(this.auth.currentUser.get().getId());
     } else {
@@ -60,14 +59,7 @@ class GoogleAuth extends React.Component {
 const mapStateToProps = state => {
   return { isSignedIn: state.auth.isSignedIn };
 };
-// const mapDispatchToProps = {
-//   signInUser,
-//   signOutUser
-// };
-const mapDispatchToProps = dispatch =>{
-  return{
-    signInUser: (userId)=>dispatch(signInUser(userId)),
-    signOutUser: ()=>dispatch(signOutUser())
-  }
-};
-export default connect(mapStateToProps, mapDispatchToProps)(GoogleAuth);
+export default connect(mapStateToProps, {
+  signInUser,
+  signOutUser
+})(GoogleAuth);
