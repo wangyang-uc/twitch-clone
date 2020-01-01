@@ -16,7 +16,7 @@ class App extends React.Component {
   componentDidMount() {}
   render() {
     return (
-      <div>
+      <div className="ui container">
         <Router history={history}>
           <Header />
           <Switch>
